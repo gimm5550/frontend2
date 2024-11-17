@@ -54,14 +54,9 @@ export default function MainList() {
         navigate(`/community_detail/${id}`); // 지정된 경로로 이동
     };
 
-    const handleEnterGoogleMap = () => {
-        console.log("/GoogleMap 로 이동")
-        navigate('/GoogleMap'); // 지정된 경로로 이동
-    };
-
     return (
         <div>
-            <button onClick={() => handleEnterGoogleMap()}>구글맵</button>
+            <button onClick={() => navigate("/GoogleMap")}>구글맵</button>
             <h1>여행 기록 목록</h1>
             <button onClick={() => setIsPopupOpen(true)}>여행 기록 생성</button> {/* 여행 기록 생성 버튼 */}
             <table>

@@ -214,7 +214,7 @@ export default {
         return instance.get(`/api/comments/${travelRecordId}`);
     },
 
-    PostPolyLine(pathData) {
-        return instance.post('/api/polyline', pathData);
+    PostPolyLine() {
+        return instance.post('/api/polyline');
     },
 }

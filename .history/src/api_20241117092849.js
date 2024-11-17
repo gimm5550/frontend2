@@ -2,8 +2,8 @@ import axios from 'axios';
 //114.204.175.6
 //172.30.126.174
 const instance = axios.create({
-    baseURL: 'http://localhost:8080',
-    timeout: 1000
+    baseURL: 'http://172.30.126.174:8080',
+    timeout: 10000
 });
 
 export default {
@@ -212,9 +212,5 @@ export default {
     // 댓글 데이터 가져오기
     getCommentsByTravelRecordId(travelRecordId) {
         return instance.get(`/api/comments/${travelRecordId}`);
-    },
-
-    PostPolyLine(pathData) {
-        return instance.post('/api/polyline', pathData);
     },
 }

@@ -213,8 +213,4 @@ export default {
     getCommentsByTravelRecordId(travelRecordId) {
         return instance.get(`/api/comments/${travelRecordId}`);
     },
-
-    PostPolyLine(pathData) {
-        return instance.post('/api/polyline', pathData);
-    },
 }

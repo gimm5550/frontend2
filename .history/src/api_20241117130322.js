@@ -215,6 +215,8 @@ export default {
     },
 
     PostPolyLine(pathData) {
-        return instance.post('/api/polyline', pathData);
+        return instance.post('/api/polyline', {
+            pathData : pathData
+        });
     },
 }
