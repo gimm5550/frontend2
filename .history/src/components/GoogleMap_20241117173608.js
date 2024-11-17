@@ -65,7 +65,7 @@ export default function GoogleMapPage() {
             }));
 
             console.log("전송 데이터:", JSON.stringify(pathData));
-            const response = await api.PostPolyLine(pathData, userId);
+            const response = await api.PostPolyLine(pathData);
             console.log("서버 응답:", response.data);
         } catch (error) {
             console.error("서버 전송 중 오류 발생:", error);
@@ -93,11 +93,9 @@ export default function GoogleMapPage() {
         }
     }, [path]);
 
-    // 로컬 스토리지에서 유저 아이디 갖고옴..
-    const [userId, setUserId] = useState(null); // 사용자 정보 상태
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('user')); // 로컬 스토리지에서 사용자 정보 가져오기
-        setUserId(userData);
+        setUser(userData);
     }, []);
 
 

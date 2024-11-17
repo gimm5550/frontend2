@@ -215,19 +215,10 @@ export default {
     },
 
     PostPolyLine(pathData, userId) {
-        console.log("userId:", userId.id)
         return instance.post('/api/polyline', 
             {
                 pathData: pathData,
-                userId: userId.id      
+                userId: userId        
             });
-    },
-    getMyTreavel(userId){
-        console.log("userId:", userId)
-        return instance.get(`/api/travel/${userId}`);
-    },
-    getMyTreavelMyPolylineId(polylineId){
-        console.log("polylineId!!!!:", polylineId)
-        return instance.get(`/api/travel/detail/${polylineId}`);
     },
 }

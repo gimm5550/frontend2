@@ -9,7 +9,6 @@ import AdminClientLayout from "./components/layout/AdminClientLayout";
 import EditFormLayout from "./components/layout/EditFormLayout";
 import GoogleMapLayout from "./components/layout/GoogleMapLayout"; // MyTravelLayout
 import MyTravelLayout from "./components/layout/MyTravelLayout";
-import MyTravelLayout_BypolylineId from "./components/layout/MyTravelLayout_BypolylineId";
 const routes = [
     {
         name:"UserDetail",
@@ -100,12 +99,6 @@ const routes = [
         route: "/MyTravel",
         component: <MyTravelLayout />, // GoogleMapLayout 컴포넌트 연결
         key: "MyTravel",
-    },
-    {
-        name:"MyTravel_BypolylineId",
-        route: "/MyTravel/:polylineId",
-        component: <MyTravelLayout_BypolylineId />, // GoogleMapLayout 컴포넌트 연결
-        key: "MyTravel_BypolylineId",
     },
 ]
 export default routes;

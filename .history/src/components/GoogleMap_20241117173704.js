@@ -65,7 +65,7 @@ export default function GoogleMapPage() {
             }));
 
             console.log("전송 데이터:", JSON.stringify(pathData));
-            const response = await api.PostPolyLine(pathData, userId);
+            const response = await api.PostPolyLine(pathData);
             console.log("서버 응답:", response.data);
         } catch (error) {
             console.error("서버 전송 중 오류 발생:", error);

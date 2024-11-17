@@ -223,11 +223,11 @@ export default {
             });
     },
     getMyTreavel(userId){
-        console.log("userId:", userId)
-        return instance.get(`/api/travel/${userId}`);
-    },
-    getMyTreavelMyPolylineId(polylineId){
-        console.log("polylineId!!!!:", polylineId)
-        return instance.get(`/api/travel/detail/${polylineId}`);
-    },
+        console.log("userId:", userId.id)
+        return instance.get(`/api/travel/${userId}`, 
+            {
+                pathData: pathData,
+                userId: userId.id      
+            });
+    }
 }

@@ -226,8 +226,8 @@ export default {
         console.log("userId:", userId)
         return instance.get(`/api/travel/${userId}`);
     },
-    getMyTreavelMyPolylineId(polylineId){
-        console.log("polylineId!!!!:", polylineId)
-        return instance.get(`/api/travel/detail/${polylineId}`);
-    },
+    getMyTreavelMyPolylineId(userId){
+        console.log("userId:", userId)
+        return instance.get(`/api/travel/${userId}`);
+    }
 }

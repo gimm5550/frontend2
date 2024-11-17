@@ -8,8 +8,7 @@ import CommunityViewLayout from "./components/layout/CommunityViewLayout"; // Ad
 import AdminClientLayout from "./components/layout/AdminClientLayout"; 
 import EditFormLayout from "./components/layout/EditFormLayout";
 import GoogleMapLayout from "./components/layout/GoogleMapLayout"; // MyTravelLayout
-import MyTravelLayout from "./components/layout/MyTravelLayout";
-import MyTravelLayout_BypolylineId from "./components/layout/MyTravelLayout_BypolylineId";
+import MyTravelLayout from "./components/layout/MyTravelLayout"; // MyTravelLayout_BypolylineId
 const routes = [
     {
         name:"UserDetail",
