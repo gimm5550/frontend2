@@ -1,0 +1,93 @@
+/* Global styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+/* Container styling */
+div {
+    max-width: 400px;
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Input fields */
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Primary button */
+button:first-of-type {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+button:first-of-type:hover {
+    background-color: #0056b3;
+}
+
+/* Secondary button */
+button:last-of-type {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+button:last-of-type:hover {
+    background-color: #565e64;
+}
+
+/* Kakao login button */
+.kakao-login-button {
+    background-color: #fee500;
+    color: #181600;
+    font-weight: bold;
+}
+
+.kakao-login-button:hover {
+    background-color: #fddc00;
+}

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import api from '../api';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import KakaoLoginButton from './common/KakaoLoginButton';
+import '../App.css'; // CSS 파일 import
 export default function FromServer() {
     const [users, setUsers] = useState(null);
     const [username, setUsername] = useState("");
@@ -16,9 +17,8 @@ export default function FromServer() {
         try {
             const res = await axios.get(REQUEST_URL.POSTS);
             console.log("res", res.data);
-            // 예시로 첫 번째 사용자 ID로 이동
             if (res.data.length > 0) {
-                const userId = res.data[0].userId; // 첫 번째 게시글의 사용자 ID를 사용
+                const userId = res.data[0].userId;
                 navigate(`/user-detail/${userId}`);
             }
         } catch (error) {
@@ -51,21 +51,18 @@ export default function FromServer() {
         navigate('/register');
     }
     const handleLogin = () => {
-        // 로그인 처리 로직 추가
         console.log("아이디:", username);
         console.log("비밀번호:", password);
-        // 예를 들어, 로그인 성공 시 특정 페이지로 이동
-        // navigate('/home'); >> routes를 만들어야함..
         api.login(username, password)
             .then(response => {
                 const { code, message, data } = response.data;
                 if (code === 0) {
                     const userData = {
-                        id: username // 사용자 ID
+                        id: username
                     };
                     localStorage.setItem('user', JSON.stringify(userData));
                     console.log("data", data);
-                    console.log("로그인 완")
+                    console.log("로그인 완");
                     navigate('/mainlist');
                 } else {
                     console.log("오류");
@@ -77,29 +74,30 @@ export default function FromServer() {
     };
 
     return (
-        <div>
-            <h1>로그인 페이지</h1>
-            <div>
-                <label htmlFor="username">아이디:</label>
+        <div className="unique-login-container">
+            <h1 className="unique-login-title">로그인 페이지</h1>
+            <div className="unique-login-input-group">
+                <label htmlFor="username" className="unique-login-label">아이디:</label>
                 <input 
                     type="text" 
                     id="username" 
+                    className="unique-login-input" 
                     value={username} 
                     onChange={(e) => setUsername(e.target.value)} 
                 />
             </div>
-            <div>
-                <label htmlFor="password">비밀번호:</label>
+            <div className="unique-login-input-group">
+                <label htmlFor="password" className="unique-login-label">비밀번호:</label>
                 <input 
                     type="password" 
                     id="password" 
+                    className="unique-login-input" 
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                 />
             </div>
-            <button onClick={handleLogin}>로그인</button>
-            <button onClick={register}>회원가입</button>
-            {/* 카카오 로그인 버튼 추가 */}
+            <button className="unique-login-button" onClick={handleLogin}>로그인</button>
+            <button className="unique-register-button" onClick={register}>회원가입</button>
             <KakaoLoginButton />
         </div>
     );

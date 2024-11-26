@@ -1,0 +1,274 @@
+/* 전체 Flexbox 레이아웃 */
+.layout {
+  display: flex; /* 메뉴바와 본문을 가로로 배치 */
+  height: 100vh; /* 전체 화면 높이 */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* 스크롤바 숨김 */
+}
+
+/* 메뉴바 스타일 */
+.menu-bar {
+  flex-shrink: 0; /* 고정된 크기 유지 */
+  width: 250px; /* 메뉴바 너비 */
+  height: 100vh; /* 메뉴바 높이를 화면 전체에 맞춤 */
+  background-color: #3b3f47; /* 메뉴바 배경색 */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  overflow: hidden; /* 스크롤바 완전히 제거 */
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  position: relative; /* Flexbox 레이아웃 안에서 위치 고정 */
+  z-index: 10; /* 다른 요소 위에 배치 */
+  color: #ffffff; /* 메뉴바 텍스트 색상 */
+  display: flex;
+  flex-direction: column; /* 항목을 세로로 정렬 */
+  align-items: center; /* 항목을 왼쪽 정렬 */
+  padding: 20px; /* 내부 여백 */
+}
+
+/* 메뉴 제목 스타일 */
+.menu-bar h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff; /* 제목 텍스트 색상 */
+  margin-bottom: 20px; /* 아래 여백 추가 */
+}
+
+/* 메뉴 아이템 리스트 */
+.menu-bar ul {
+  list-style: none; /* 기본 리스트 스타일 제거 */
+  padding: 0;
+  margin: 0;
+  width: 100%; /* 메뉴 리스트가 메뉴바의 전체 너비를 사용 */
+}
+
+/* 메뉴 아이템 스타일 */
+.menu-bar ul li {
+  margin-bottom: 15px; /* 각 메뉴 항목 간격 */
+}
+
+.menu-bar ul li a {
+  text-decoration: none; /* 링크 밑줄 제거 */
+  color: #ffffff; /* 링크 텍스트 색상 */
+  font-size: 1rem;
+  padding: 10px 15px; /* 링크 내부 여백 */
+  border-radius: 5px; /* 링크 모서리를 둥글게 */
+  display: block; /* 블록 요소로 설정 */
+  transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+}
+
+.menu-bar ul li a:hover {
+  background-color: #5c5f67; /* 호버 시 배경색 변경 */
+  color: #ffffff; /* 호버 시 텍스트 색상 유지 */
+}
+
+/* 메뉴바 버튼 스타일 */
+.menu-bar button {
+  width: 100%; /* 버튼이 메뉴바의 전체 너비를 사용 */
+  margin: 10px 0; /* 버튼 간격 */
+  padding: 10px 15px; /* 버튼 내부 여백 */
+  font-size: 1rem;
+  color: #ffffff; /* 버튼 텍스트 색상 */
+  background-color: #007bff; /* 기본 배경색 (파란색) */
+  border: none; /* 테두리 제거 */
+  border-radius: 5px; /* 모서리를 둥글게 */
+  cursor: pointer; /* 마우스 포인터 변경 */
+  transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+}
+
+.menu-bar button:hover {
+  background-color: #0056b3; /* 호버 시 배경색 어둡게 */
+}
+
+/* 본문 영역 스타일 */
+.main-content1 {
+  flex: 1; /* 남은 공간을 유동적으로 채움 */
+  overflow-y: auto; /* 세로 스크롤 허용 */
+  padding: 20px; /* 내부 여백 */
+  background-color: #ffffff; /* 본문 배경색 */
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+/* 여백 제거 */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+.comments-section {
+  margin: 20px auto;
+  max-width: 10000px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comments-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.comments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comment-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.comment-author {
+  font-weight: bold;
+}
+
+.comment-timestamp {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.comment-content {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.comment-input,
+.comment-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #fff;
+}
+
+.comment-input:focus,
+.comment-textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.comment-submit-button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.comment-submit-button:hover {
+  background-color: #0056b3;
+}
+.map-container {
+  display: flex;
+  width: 100%;
+  height: 100vh; /* 화면 전체 높이 */
+}
+
+.google_map {
+  flex: 1; /* 지도는 가변적으로 남은 공간을 차지 */
+  height: 100%;
+}
+
+.place_info {
+  width: 300px; /* 고정된 너비 */
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #ccc; /* 지도와 구분선을 추가 */
+  padding: 20px;
+  box-sizing: border-box;
+}
+/* main_post 스타일링 */
+.main_post {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px; /* 적절한 너비 제한 */
+  margin-left: auto; /* 중앙 정렬 */
+  margin-right: auto; /* 중앙 정렬 */
+}
+
+.main_post textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none; /* 크기 조절 비활성화 */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.main_post input[type="file"] {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.main_post button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.main_post button:hover {
+  background-color: #0056b3; /* 호버 시 어두운 파란색 */
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+  .main_post {
+      max-width: 90%; /* 화면 크기 좁아지면 너비 줄이기 */
+      padding: 15px;
+  }
+
+  .main_post textarea {
+      height: 80px;
+  }
+
+  .main_post button {
+      padding: 8px 15px;
+      font-size: 13px;
+  }
+}

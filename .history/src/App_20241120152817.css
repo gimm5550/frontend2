@@ -1,0 +1,38 @@
+/* 전체 Flexbox 레이아웃 */
+.layout {
+  display: flex; /* 메뉴바와 본문을 가로로 배치 */
+  height: 100vh; /* 전체 화면 높이 */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* 스크롤바 숨김 */
+}
+
+/* 메뉴바 스타일 */
+.menu-bar {
+  flex-shrink: 0; /* 고정된 크기 유지 */
+  width: 250px; /* 메뉴바 너비 */
+  height: 100vh; /* 메뉴바 높이를 화면 전체에 맞춤 */
+  background-color: #f4f4f4; /* 메뉴바 배경색 */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  overflow-y: auto; /* 스크롤 가능 */
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  position: relative; /* Flexbox 레이아웃 안에서 위치 고정 */
+  z-index: 10; /* 다른 요소 위에 배치 */
+}
+
+/* 본문 영역 스타일 */
+.main-content1 {
+  flex: 1; /* 남은 공간을 유동적으로 채움 */
+  overflow-y: auto; /* 세로 스크롤 허용 */
+  padding: 20px; /* 내부 여백 */
+  background-color: #ffffff; /* 본문 배경색 */
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+/* 여백 제거 */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
