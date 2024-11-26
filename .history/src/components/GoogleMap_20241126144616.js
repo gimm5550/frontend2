@@ -58,10 +58,11 @@ export default function GoogleMapPage() {
                             name: place.name,
                             position: place.geometry.location,
                             type: place.types,
-                            photoUrl: place.photos ? place.photos[0].getUrl() : null, // 명소 이미지 URL
-                            address: place.vicinity, // 명소 주소
-                            rating: place.rating, // 명소 평점
+                            photoUrl: place.photos ? place.photos[0].getUrl() : null,
+                            address: place.vicinity,
+                            rating: place.rating,
                         })));
+                        
                     } else {
                         setPlaces([]); // 데이터가 없으면 명소 초기화
                     }
@@ -79,7 +80,6 @@ export default function GoogleMapPage() {
 
     // 체크박스 변경 핸들러
     const handleTypeChange = (type) => {
-        console.log("type!!!!", type)
         setSelectedTypes(prev => {
             const newSet = new Set(prev);
             if (newSet.has(type)) {
@@ -87,7 +87,6 @@ export default function GoogleMapPage() {
             } else {
                 newSet.add(type);
             }
-            console.log("newSet:", newSet)
             return newSet;
         });
         handleZoomChanged(); // 필터 변경 시 명소 업데이트

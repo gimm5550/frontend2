@@ -264,24 +264,6 @@ export default function BypolylineId() {
                     <span style={{ marginLeft: "5px", fontSize: "14px", fontWeight: "bold" }}>
                         {likes}
                     </span>
-                    {!showPhotos && (
-                    <div style={{ textAlign: "center", margin: "10px 0" }}>
-                        <button
-                            onClick={togglePhotos}
-                            style={{
-                                backgroundColor: "#4CAF50",
-                                color: "white",
-                                padding: "10px 20px",
-                                fontSize: "14px",
-                                border: "none",
-                                borderRadius: "5px",
-                                cursor: "pointer",
-                            }}
-                        >
-                            사진 펼치기
-                        </button>
-                    </div>
-                )}
                 </div>
     
                 <div>

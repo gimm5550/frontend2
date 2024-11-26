@@ -19,11 +19,6 @@ export default function BypolylineId() {
     const [photos, setPhotos] = useState([]); // 여러 사진 경로 상태 추가
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0); // 슬라이더 현재 사진 인덱스
     const [likes, setLikes] = useState(0); // 추천수 상태 추가
-    const [showPhotos, setShowPhotos] = useState(false);
-    const togglePhotos = () => {
-        setShowPhotos(!showPhotos);
-    };
-
     useEffect(() => {
         if (!polylineId) {
             return;
@@ -158,62 +153,7 @@ export default function BypolylineId() {
                 <div style={{ margin: "10px 0" }}>
                     <p style={{ fontSize: "12px", lineHeight: "1.4" }}>{postContent}</p>
                 </div>
-                {showPhotos && photos.length > 0 && (
-                    <div style={{ textAlign: "center", marginTop: "10px", position: "relative" }}>
-                        <button
-                            onClick={handlePrevPhoto}
-                            style={{
-                                position: "absolute",
-                                top: "50%",
-                                left: "10px",
-                                transform: "translateY(-50%)",
-                                background: "rgba(0,0,0,0.5)",
-                                color: "white",
-                                border: "none",
-                                padding: "10px",
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                            }}
-                        >
-                            {"<"}
-                        </button>
-                        <img
-                            src={photos[currentPhotoIndex].startsWith("http")
-                                ? photos[currentPhotoIndex]
-                                : `http://localhost:8080${photos[currentPhotoIndex]}`}
-                            alt={`Uploaded ${currentPhotoIndex + 1}`}
-                            style={{
-                                width: "100%",
-                                maxWidth: "600px",
-                                minHeight: "400px",
-                                maxHeight: "400px",
-                                height: "auto",
-                                borderRadius: "8px",
-                                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                                objectFit: "contain",
-                            }}
-                        />
-                        <button
-                            onClick={handleNextPhoto}
-                            style={{
-                                position: "absolute",
-                                top: "50%",
-                                right: "10px",
-                                transform: "translateY(-50%)",
-                                background: "rgba(0,0,0,0.5)",
-                                color: "white",
-                                border: "none",
-                                padding: "10px",
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                            }}
-                        >
-                            {">"}
-                        </button>
-                    </div>
-                )}
-
-                
+    
                 {/* 구글 맵으로 채운 영역 */}
                 {error ? (
                     <p style={{ color: "red", textAlign: "center", fontSize: "12px" }}>{error}</p>
@@ -264,24 +204,6 @@ export default function BypolylineId() {
                     <span style={{ marginLeft: "5px", fontSize: "14px", fontWeight: "bold" }}>
                         {likes}
                     </span>
-                    {!showPhotos && (
-                    <div style={{ textAlign: "center", margin: "10px 0" }}>
-                        <button
-                            onClick={togglePhotos}
-                            style={{
-                                backgroundColor: "#4CAF50",
-                                color: "white",
-                                padding: "10px 20px",
-                                fontSize: "14px",
-                                border: "none",
-                                borderRadius: "5px",
-                                cursor: "pointer",
-                            }}
-                        >
-                            사진 펼치기
-                        </button>
-                    </div>
-                )}
                 </div>
     
                 <div>

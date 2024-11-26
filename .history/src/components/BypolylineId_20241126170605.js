@@ -19,11 +19,6 @@ export default function BypolylineId() {
     const [photos, setPhotos] = useState([]); // 여러 사진 경로 상태 추가
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0); // 슬라이더 현재 사진 인덱스
     const [likes, setLikes] = useState(0); // 추천수 상태 추가
-    const [showPhotos, setShowPhotos] = useState(false);
-    const togglePhotos = () => {
-        setShowPhotos(!showPhotos);
-    };
-
     useEffect(() => {
         if (!polylineId) {
             return;
@@ -158,69 +153,14 @@ export default function BypolylineId() {
                 <div style={{ margin: "10px 0" }}>
                     <p style={{ fontSize: "12px", lineHeight: "1.4" }}>{postContent}</p>
                 </div>
-                {showPhotos && photos.length > 0 && (
-                    <div style={{ textAlign: "center", marginTop: "10px", position: "relative" }}>
-                        <button
-                            onClick={handlePrevPhoto}
-                            style={{
-                                position: "absolute",
-                                top: "50%",
-                                left: "10px",
-                                transform: "translateY(-50%)",
-                                background: "rgba(0,0,0,0.5)",
-                                color: "white",
-                                border: "none",
-                                padding: "10px",
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                            }}
-                        >
-                            {"<"}
-                        </button>
-                        <img
-                            src={photos[currentPhotoIndex].startsWith("http")
-                                ? photos[currentPhotoIndex]
-                                : `http://localhost:8080${photos[currentPhotoIndex]}`}
-                            alt={`Uploaded ${currentPhotoIndex + 1}`}
-                            style={{
-                                width: "100%",
-                                maxWidth: "600px",
-                                minHeight: "400px",
-                                maxHeight: "400px",
-                                height: "auto",
-                                borderRadius: "8px",
-                                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                                objectFit: "contain",
-                            }}
-                        />
-                        <button
-                            onClick={handleNextPhoto}
-                            style={{
-                                position: "absolute",
-                                top: "50%",
-                                right: "10px",
-                                transform: "translateY(-50%)",
-                                background: "rgba(0,0,0,0.5)",
-                                color: "white",
-                                border: "none",
-                                padding: "10px",
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                            }}
-                        >
-                            {">"}
-                        </button>
-                    </div>
-                )}
-
-                
+    
                 {/* 구글 맵으로 채운 영역 */}
                 {error ? (
                     <p style={{ color: "red", textAlign: "center", fontSize: "12px" }}>{error}</p>
                 ) : (
                     <LoadScript googleMapsApiKey="AIzaSyAWWAlxhWa2A20TsMzA7oivnox-QDjjwyQ">
                         <GoogleMap
-                            mapContainerStyle={{ height: "500px", width: "100%" }}
+                            mapContainerStyle={{ height: "200px", width: "100%" }}
                             center={mapCenter}
                             zoom={12}
                             onLoad={handleMapLoad}
@@ -264,97 +204,40 @@ export default function BypolylineId() {
                     <span style={{ marginLeft: "5px", fontSize: "14px", fontWeight: "bold" }}>
                         {likes}
                     </span>
-                    {!showPhotos && (
-                    <div style={{ textAlign: "center", margin: "10px 0" }}>
-                        <button
-                            onClick={togglePhotos}
-                            style={{
-                                backgroundColor: "#4CAF50",
-                                color: "white",
-                                padding: "10px 20px",
-                                fontSize: "14px",
-                                border: "none",
-                                borderRadius: "5px",
-                                cursor: "pointer",
-                            }}
-                        >
-                            사진 펼치기
-                        </button>
-                    </div>
-                )}
                 </div>
     
                 <div>
-    <h3 style={{ fontSize: "14px", marginBottom: "5px", textAlign: "center", color: "#333", fontWeight: "bold" }}>댓글</h3>
-    <ul style={{ padding: "0", margin: "0", listStyle: "none", borderTop: "1px solid #ddd", borderBottom: "1px solid #ddd", padding: "10px" }}>
-        {comments.map((comment, index) => (
-            <li 
-                key={index} 
-                style={{ 
-                    fontSize: "12px", 
-                    marginBottom: "10px", 
-                    padding: "10px", 
-                    borderRadius: "5px", 
-                    backgroundColor: "#f7f7f7", 
-                    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)" 
-                }}
-            >
-                <strong style={{ color: "#007bff" }}>{comment.author}:</strong> {comment.content}
-                <span style={{ fontSize: "10px", color: "gray", marginLeft: "5px" }}> ({comment.timestamp})</span>
-            </li>
-        ))}
-    </ul>
-    <div style={{ marginTop: "10px", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <input
-            type="text"
-            placeholder="작성자"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            style={{
-                fontSize: "12px",
-                padding: "8px",
-                width: "80%",
-                marginBottom: "10px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.1)"
-            }}
-        />
-        <div style={{ display: "flex", width: "80%" }}>
-            <textarea
-                placeholder="댓글을 입력하세요"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                style={{
-                    fontSize: "12px",
-                    padding: "8px",
-                    width: "75%",
-                    height: "50px",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.1)"
-                }}
-            />
-            <button
-                onClick={handleAddComment}
-                style={{
-                    fontSize: "12px",
-                    padding: "8px 15px",
-                    marginLeft: "10px",
-                    border: "none",
-                    backgroundColor: "#007bff",
-                    color: "white",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
-                }}
-            >
-                댓글 추가
-            </button>
-        </div>
-    </div>
-</div>
-
+                    <h3 style={{ fontSize: "14px", marginBottom: "5px" }}>댓글</h3>
+                    <ul style={{ padding: "0", margin: "0", listStyle: "none" }}>
+                        {comments.map((comment, index) => (
+                            <li key={index} style={{ fontSize: "12px", marginBottom: "5px" }}>
+                                <strong>{comment.author}:</strong> {comment.content}
+                                <span style={{ fontSize: "10px", color: "gray" }}> ({comment.timestamp})</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <div style={{ marginTop: "10px" }}>
+                        <input
+                            type="text"
+                            placeholder="작성자"
+                            value={author}
+                            onChange={(e) => setAuthor(e.target.value)}
+                            style={{ fontSize: "12px", padding: "5px", width: "45%", marginRight: "5px" }}
+                        />
+                        <textarea
+                            placeholder="댓글을 입력하세요"
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                            style={{ fontSize: "12px", padding: "5px", width: "45%", height: "40px" }}
+                        />
+                        <button
+                            onClick={handleAddComment}
+                            style={{ fontSize: "12px", padding: "5px 10px", marginLeft: "5px" }}
+                        >
+                            댓글 추가
+                        </button>
+                    </div>
+                </div>
             </div>
     
             {/* 오른쪽 정보 영역 */}

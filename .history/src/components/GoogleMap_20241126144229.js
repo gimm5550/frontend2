@@ -38,13 +38,8 @@ export default function GoogleMapPage() {
             const bounds = mapRef.current.getBounds();
             const zoom = mapRef.current.getZoom();
     
-            // 필터가 모두 해제된 경우 명소를 비우고 요청 중단
-            if (selectedTypes.size === 0) {
-                setPlaces([]); // 지도에서 마커 제거
-                return; // API 호출 중단
-            }
-    
-            if (zoom >= 16) {
+            // Zoom level이 16 이상일 때만 명소 가져오기
+            if (zoom >= 16 && selectedTypes.size > 0) {
                 const placesService = new window.google.maps.places.PlacesService(mapRef.current);
                 const request = {
                     bounds,
@@ -67,19 +62,14 @@ export default function GoogleMapPage() {
                     }
                 });
             } else {
-                setPlaces([]); // Zoom level이 낮으면 명소 비우기
+                setPlaces([]); // Zoom level이 낮거나 필터가 모두 해제되었을 경우 명소 비우기
             }
         }
     };
     
-    useEffect(() => {
-        handleZoomChanged(); // 필터 상태 변경 시 지도 업데이트
-    }, [selectedTypes]);
-    
 
     // 체크박스 변경 핸들러
     const handleTypeChange = (type) => {
-        console.log("type!!!!", type)
         setSelectedTypes(prev => {
             const newSet = new Set(prev);
             if (newSet.has(type)) {
@@ -87,7 +77,6 @@ export default function GoogleMapPage() {
             } else {
                 newSet.add(type);
             }
-            console.log("newSet:", newSet)
             return newSet;
         });
         handleZoomChanged(); // 필터 변경 시 명소 업데이트

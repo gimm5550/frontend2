@@ -20,10 +20,6 @@ export default function BypolylineId() {
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0); // 슬라이더 현재 사진 인덱스
     const [likes, setLikes] = useState(0); // 추천수 상태 추가
     const [showPhotos, setShowPhotos] = useState(false);
-    const togglePhotos = () => {
-        setShowPhotos(!showPhotos);
-    };
-
     useEffect(() => {
         if (!polylineId) {
             return;
@@ -213,7 +209,24 @@ export default function BypolylineId() {
                     </div>
                 )}
 
-                
+                {!showPhotos && (
+                    <div style={{ textAlign: "center", margin: "10px 0" }}>
+                        <button
+                            onClick={togglePhotos}
+                            style={{
+                                backgroundColor: "#4CAF50",
+                                color: "white",
+                                padding: "10px 20px",
+                                fontSize: "14px",
+                                border: "none",
+                                borderRadius: "5px",
+                                cursor: "pointer",
+                            }}
+                        >
+                            사진 펼치기
+                        </button>
+                    </div>
+                )}
                 {/* 구글 맵으로 채운 영역 */}
                 {error ? (
                     <p style={{ color: "red", textAlign: "center", fontSize: "12px" }}>{error}</p>
@@ -264,24 +277,6 @@ export default function BypolylineId() {
                     <span style={{ marginLeft: "5px", fontSize: "14px", fontWeight: "bold" }}>
                         {likes}
                     </span>
-                    {!showPhotos && (
-                    <div style={{ textAlign: "center", margin: "10px 0" }}>
-                        <button
-                            onClick={togglePhotos}
-                            style={{
-                                backgroundColor: "#4CAF50",
-                                color: "white",
-                                padding: "10px 20px",
-                                fontSize: "14px",
-                                border: "none",
-                                borderRadius: "5px",
-                                cursor: "pointer",
-                            }}
-                        >
-                            사진 펼치기
-                        </button>
-                    </div>
-                )}
                 </div>
     
                 <div>

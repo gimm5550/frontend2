@@ -1,6 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { GoogleMap, LoadScript, Autocomplete, Polyline, Marker, InfoWindow } from "@react-google-maps/api";
 import api from "../api"; // API 호출을 위한 모듈
+import debounce from "lodash.debounce";
+
+
 
 const libraries = ["places"];
 const types = ["restaurant", "park", "museum"]; // 명소 타입
@@ -23,7 +26,12 @@ export default function GoogleMapPage() {
     const [concentrationRates, setConcentrationRates] = useState([]); // 집중도 데이터 상태 추가
     const [visibility, setVisibility] = useState("public"); // 공개 여부 상태 추가
     const [history, setHistory] = useState([]); // 변경 이력 저장
-    
+    const debouncedHandleZoomChanged = debounce(handleZoomChanged, 300);
+
+    // useEffect(() => {
+        // debouncedHandleZoomChanged(); // 필터 변경 시 300ms 지연 후 호출
+        // return debouncedHandleZoomChanged.cancel; // 컴포넌트 언마운트 시 정리
+    // }, [selectedTypes]);
     // 로컬 스토리지에서 사용자 ID 가져오기
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem("user"));
@@ -33,22 +41,21 @@ export default function GoogleMapPage() {
     }, []);
 
     // 지도 확대/축소 변경 이벤트
-    const handleZoomChanged = async () => {
+    const handleZoomChanged = useCallback(async () => {
         if (mapRef.current) {
             const bounds = mapRef.current.getBounds();
             const zoom = mapRef.current.getZoom();
     
-            // 필터가 모두 해제된 경우 명소를 비우고 요청 중단
             if (selectedTypes.size === 0) {
                 setPlaces([]); // 지도에서 마커 제거
-                return; // API 호출 중단
+                return;
             }
     
             if (zoom >= 16) {
                 const placesService = new window.google.maps.places.PlacesService(mapRef.current);
                 const request = {
                     bounds,
-                    type: Array.from(selectedTypes), // 선택된 타입 필터링
+                    type: Array.from(selectedTypes),
                 };
     
                 placesService.nearbySearch(request, (results, status) => {
@@ -58,28 +65,28 @@ export default function GoogleMapPage() {
                             name: place.name,
                             position: place.geometry.location,
                             type: place.types,
-                            photoUrl: place.photos ? place.photos[0].getUrl() : null, // 명소 이미지 URL
-                            address: place.vicinity, // 명소 주소
-                            rating: place.rating, // 명소 평점
+                            photoUrl: place.photos ? place.photos[0].getUrl() : null,
+                            address: place.vicinity,
+                            rating: place.rating,
                         })));
                     } else {
-                        setPlaces([]); // 데이터가 없으면 명소 초기화
+                        setPlaces([]);
                     }
                 });
             } else {
-                setPlaces([]); // Zoom level이 낮으면 명소 비우기
+                setPlaces([]);
             }
         }
-    };
-    
-    useEffect(() => {
-        handleZoomChanged(); // 필터 상태 변경 시 지도 업데이트
     }, [selectedTypes]);
+    
+    
+    // useEffect(() => {
+    //     handleZoomChanged(); // 필터 상태 변경 시 지도 업데이트
+    // }, [selectedTypes, handleZoomChanged]);
     
 
     // 체크박스 변경 핸들러
     const handleTypeChange = (type) => {
-        console.log("type!!!!", type)
         setSelectedTypes(prev => {
             const newSet = new Set(prev);
             if (newSet.has(type)) {
@@ -87,7 +94,6 @@ export default function GoogleMapPage() {
             } else {
                 newSet.add(type);
             }
-            console.log("newSet:", newSet)
             return newSet;
         });
         handleZoomChanged(); // 필터 변경 시 명소 업데이트

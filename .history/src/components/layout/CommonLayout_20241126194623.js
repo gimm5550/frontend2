@@ -7,7 +7,7 @@ export default function CommonLayout({ children, mainlist }) {
   return (
     <div className="common-layout">
       <div className="main-content2" 
-           style={ mainlist?.match("mainlist") && {width:"85%", margin:"0 auto", maxWidth: "720px", minWidth: "400px"}} >
+            { mainlist?.match("mainList") && style={{width:"85%", margin:"0 auto", maxWidth: "720px", minWidth: "400px"}} }>
       
         {children}
       </div>

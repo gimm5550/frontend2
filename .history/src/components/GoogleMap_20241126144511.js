@@ -79,7 +79,6 @@ export default function GoogleMapPage() {
 
     // 체크박스 변경 핸들러
     const handleTypeChange = (type) => {
-        console.log("type!!!!", type)
         setSelectedTypes(prev => {
             const newSet = new Set(prev);
             if (newSet.has(type)) {
@@ -87,7 +86,6 @@ export default function GoogleMapPage() {
             } else {
                 newSet.add(type);
             }
-            console.log("newSet:", newSet)
             return newSet;
         });
         handleZoomChanged(); // 필터 변경 시 명소 업데이트

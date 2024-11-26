@@ -87,7 +87,6 @@ export default function GoogleMapPage() {
             } else {
                 newSet.add(type);
             }
-            console.log("newSet:", newSet)
             return newSet;
         });
         handleZoomChanged(); // 필터 변경 시 명소 업데이트
