@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../../App.css";
+import "../../menubar.css";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
 
@@ -62,9 +62,11 @@ const MenuBar = () => {
               <Link to="/GoogleMap">여행기록 생성</Link>
             </li>
           </ul>
-          <button onClick={handleLogout}>로그아웃</button>
-          <button onClick={handleEditProfile}>회원정보 수정</button>
-          <button onClick={handleDelete}>회원탈퇴</button>
+          <div className="btn-container">
+            <button onClick={handleLogout}>로그아웃</button>
+            <button onClick={handleEditProfile}>회원정보 수정</button>
+            <button onClick={handleDelete}>회원탈퇴</button>
+          </div>
         </div>
       )}
     </>

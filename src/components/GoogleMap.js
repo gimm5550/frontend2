@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { GoogleMap, LoadScript, Autocomplete, Polyline, Marker, InfoWindow } from "@react-google-maps/api";
 import api from "../api"; // API 호출을 위한 모듈
+import "../mapStyles.css"
 
 const libraries = ["places"];
 const types = ["restaurant", "park", "museum"]; // 명소 타입
@@ -23,7 +24,7 @@ export default function GoogleMapPage() {
     const [concentrationRates, setConcentrationRates] = useState([]); // 집중도 데이터 상태 추가
     const [visibility, setVisibility] = useState("public"); // 공개 여부 상태 추가
     const [history, setHistory] = useState([]); // 변경 이력 저장
-    
+
     // 로컬 스토리지에서 사용자 ID 가져오기
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem("user"));
@@ -37,20 +38,20 @@ export default function GoogleMapPage() {
         if (mapRef.current) {
             const bounds = mapRef.current.getBounds();
             const zoom = mapRef.current.getZoom();
-    
+
             // 필터가 모두 해제된 경우 명소를 비우고 요청 중단
             if (selectedTypes.size === 0) {
                 setPlaces([]); // 지도에서 마커 제거
                 return; // API 호출 중단
             }
-    
+
             if (zoom >= 16) {
                 const placesService = new window.google.maps.places.PlacesService(mapRef.current);
                 const request = {
                     bounds,
                     type: Array.from(selectedTypes), // 선택된 타입 필터링
                 };
-    
+
                 placesService.nearbySearch(request, (results, status) => {
                     if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                         setPlaces(results.map(place => ({
@@ -71,11 +72,11 @@ export default function GoogleMapPage() {
             }
         }
     };
-    
+
     useEffect(() => {
         handleZoomChanged(); // 필터 상태 변경 시 지도 업데이트
     }, [selectedTypes]);
-    
+
 
     // 체크박스 변경 핸들러
     const handleTypeChange = (type) => {
@@ -96,14 +97,14 @@ export default function GoogleMapPage() {
         if (mapRef.current) {
             const bounds = mapRef.current.getBounds();
             const zoom = mapRef.current.getZoom();
-    
+
             if (zoom >= 16) {
                 const placesService = new window.google.maps.places.PlacesService(mapRef.current);
                 const request = {
                     bounds,
                     type: Array.from(selectedTypes), // 선택된 타입 필터링
                 };
-    
+
                 placesService.nearbySearch(request, (results, status) => {
                     if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                         setPlaces(results.map(place => ({
@@ -124,7 +125,7 @@ export default function GoogleMapPage() {
             }
         }
     };
-    
+
     // 명소 마커 클릭 핸들러
     const handlePlaceClick = (place) => {
         setSelectedPlace(place);
@@ -164,7 +165,7 @@ export default function GoogleMapPage() {
         // 변경 전 상태를 기록
         setHistory((prevHistory) => [...prevHistory, [...path]]);
         setPath((prevPath) => [...prevPath, latLng]);
-        
+
     };
     // 되돌리기 기능
     const undoLastPoint = () => {
@@ -192,7 +193,7 @@ export default function GoogleMapPage() {
         }
     };
 
-    
+
 
     const handlePolylineDoubleClick = (event) => {
         const latLng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
@@ -230,29 +231,29 @@ export default function GoogleMapPage() {
             radius: 5000,
             _type: "json",
         });
-    
+
         try {
             const response = await fetch(`${baseURL}?${params}`);
             const data = await response.json();
-        
+
             if (data.response && data.response.body) {
                 const items = data.response.body.items.item;
-        
+
                 if (items.length > 0) {
-        
+
                     // 첫 번째 item의 addr1 값 확인
                     let addr1 = items[0].addr1;
-        
+
                     // addr1 값이 비어있으면 두 번째 item의 addr1 값을 가져옴
                     if (!addr1 && items.length > 1) {
                         addr1 = items[1].addr1;
                         console.warn("First addr1 was empty. Using second addr1:", addr1);
                     }
-        
+
                     if (addr1) {
                         const parts = addr1.split(" "); // 띄어쓰기로 분리
                         const region = parts[1]; // 두 번째 인덱스 (지역 이름)
-        
+
                         const sigunguCode = sigunguMap[region]; // 시군구 코드 조회
                         const sigunguCodePrefix = sigunguCode.toString().slice(0, 2); // 시군구 코드의 앞 두 자리 추출     
                         // fetchTouristConcentrationInfo 호출
@@ -266,33 +267,33 @@ export default function GoogleMapPage() {
             }
         } catch (error) {
             console.error("Error fetching tourist info: ", error);
-        }   
+        }
     };
-    
+
     const handleMarkerRightClick = (markerIndex) => {
         setMarkers((prevMarkers) => prevMarkers.filter((_, index) => index !== markerIndex));
     };
-    
+
     const fetchTouristConcentrationInfo = async (areaCd, sigunguCd, tAtsNm) => {
         console.log("tAtsNm:", tAtsNm);
         console.log("areaCd:", areaCd);
         console.log("sigunguCd:", sigunguCd);
         console.log("fetchTouristConcentrationInfo 실행됨");
-    
+
         try {
             const service_key =
                 "B6yoGtpONP7teTz9XRQHgw2WyPG3EipHt%2FhWAGbHZ5j9Jgl0rOt4LEAW%2BAnCxu8zmyLc0y00dCpBzXgesBG2Wg%3D%3D";
             const response = await fetch(
                 `http://apis.data.go.kr/B551011/TatsCnctrRateService/tatsCnctrRatedList?serviceKey=${service_key}&numOfRows=30&pageNo=1&MobileOS=ETC&MobileApp=AppTest&areaCd=${areaCd}&signguCd=${sigunguCd}&tAtsNm=${tAtsNm}&_type=json`
             );
-    
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-    
+
             const data = await response.json();
             console.log("concen_data!!:", data);
-    
+
             // cnctrRate 값과 날짜를 추출하여 상태에 저장
             if (data.response?.body?.items?.item) {
                 const rates = data.response.body.items.item.map((item) => ({
@@ -308,9 +309,9 @@ export default function GoogleMapPage() {
             console.error("Error fetching tourist concentration info:", error);
         }
     };
-    
-    
-    
+
+
+
     const sigunguMap = {
         "종로구": 11110,
         "중구": 11140,
@@ -565,26 +566,26 @@ export default function GoogleMapPage() {
         "고창군": 52790,
         "부안군": 52800,
     };
-    
+
     const sendPathToServer = async () => {
         const postContent = document.getElementById("postContent").value;
         const uploadImages = document.getElementById("uploadImage").files; // 여러 파일 가져오기
-    
+
         if (!userId || !title || path.length < 2) {
             alert("유효한 사용자 ID, 제목 및 경로를 입력하세요.");
             return;
         }
-    
+
         if (!postContent) {
             alert("본문 내용을 입력하세요.");
             return;
         }
-    
+
         if (!uploadImages || uploadImages.length === 0) {
             alert("사진을 업로드하세요.");
             return;
         }
-    
+
         const payload = {
             pathData: path,
             markersData: markers.map(marker => ({
@@ -597,15 +598,15 @@ export default function GoogleMapPage() {
             visibility,
             postContent, // 본문 내용 추가
         };
-    
+
         const formData = new FormData();
         formData.append("payload", JSON.stringify(payload)); // JSON 데이터를 문자열로 추가
-    
+
         // 다중 파일 업로드를 위해 파일들을 반복 처리
         Array.from(uploadImages).forEach(file => {
             formData.append("files", file); // "files" 키로 각각의 파일 추가
         });
-    
+
         try {
             console.log("서버로 전송할 데이터:", payload);
             const response = await api.PostPolyLine(formData);
@@ -616,225 +617,177 @@ export default function GoogleMapPage() {
             alert("데이터 전송 중 오류가 발생했습니다.");
         }
     };
-    
-    
-    
-
 
     return (
         <div className="map-container">
-    <div className="google_map">
-        <LoadScript googleMapsApiKey="AIzaSyAWWAlxhWa2A20TsMzA7oivnox-QDjjwyQ" libraries={libraries}>
-            <div style={{ marginBottom: "10px" }}>
-                    <button
-                        onClick={undoLastPoint}
-                        style={{
-                            padding: "10px",
-                            backgroundColor: "#007bff",
-                            color: "white",
-                            border: "none",
-                            borderRadius: "5px",
-                            cursor: "pointer",
-                        }}
-                    >
-                        되돌리기 (Ctrl+Z)
-                    </button>
-            </div>
-            <div style={{ padding: "10px", backgroundColor: "#f1f1f1", display: "flex", flexWrap: "wrap" }}>
-                {types.map((type) => (
-                    <label key={type} style={{ marginRight: "10px" }}>
-                        <input
-                            type="checkbox"
-                            checked={selectedTypes.has(type)}
-                            onChange={() => handleTypeChange(type)}
-                        />
-                        {type}
-                    </label>
-                ))}
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="여행 제목을 입력하세요"
-                    style={{ padding: "10px", marginLeft: "10px", width: "200px" }}
-                />
-                
-                <button
-                    onClick={sendPathToServer}
-                    style={{
-                        padding: "10px 20px",
-                        backgroundColor: "#007bff",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                        marginLeft: "10px",
-                    }}
-                >
-                    서버로 전송
-                </button>
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "20px", marginLeft: "10px" }}>
-    <label style={{ display: "inline-flex", alignItems: "center", gap: "5px", whiteSpace: "nowrap" }}>
-        <input
-            type="radio"
-            value="public"
-            checked={visibility === "public"}
-            onChange={() => setVisibility("public")}
-        />
-        공개
-    </label>
-    <label style={{ display: "inline-flex", alignItems: "center", gap: "5px", whiteSpace: "nowrap" }}>
-        <input
-            type="radio"
-            value="private"
-            checked={visibility === "private"}
-            onChange={() => setVisibility("private")}
-        />
-        비공개
-    </label>
-</div>
-
-
-
-            </div>
-            <GoogleMap
-                mapContainerClassName="map"
-                mapContainerStyle={{ height: "100%", width: "100%" }}
-                center={mapCenter}
-                zoom={12}
-                onClick={handleMapClick}
-                onRightClick={handlePolylineDoubleClick}
-                onZoomChanged={handleZoomChanged}
-                onLoad={(map) => (mapRef.current = map)}
-                onBoundsChanged={handleBoundsChanged} // 추가된 이벤트
-            >
-                {path.length > 1 && (
-                    <Polyline
-                        path={path}
-                        options={{
-                            strokeColor: "#FF0000",
-                            strokeOpacity: 1.0,
-                            strokeWeight: 2,
-                            draggable: true,
-                            editable: true,
-                        }}
-                        onLoad={(polyline) => (polylineRef.current = polyline)}
-                        onMouseUp={handlePolylineEdit}
-                    />
-                )}
-                {markers.map((marker, index) => (
-    <Marker
-        key={index}
-        position={marker.position}
-        icon={{
-            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-        }}
-        onClick={() => handleMarkerClick(index)}
-        onRightClick={() => handleMarkerRightClick(index)}
-    >
-        {activeMarker === index && (
-            <InfoWindow
-                position={marker.position}
-                onCloseClick={() => setActiveMarker(null)} // InfoWindow 닫기
-            >
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-                    <textarea
-                        value={markerMemo}
-                        onChange={handleMemoChange}
-                        placeholder="메모를 입력하세요"
-                        style={{ width: "200px", height: "100px", marginBottom: "5px" }}
-                    />
-                    <button
-                        onClick={handleMemoSave}
-                        style={{
-                            padding: "5px 10px",
-                            backgroundColor: "#007bff",
-                            color: "white",
-                            border: "none",
-                            borderRadius: "3px",
-                            cursor: "pointer",
-                        }}
-                    >
-                        저장
-                    </button>
-                </div>
-            </InfoWindow>
-        )}
-    </Marker>
-))}
-
-                {places.map((place) => (
-                    <Marker
-                        key={place.id}
-                        position={place.position}
-                        onClick={() => handlePlaceClick(place)} // 클릭 시 place 정보 업데이트
-                    />
-                ))}
-            </GoogleMap>
-        </LoadScript>
-        {/* main_post를 명소 정보 섹션 아래로 이동 */}
-    <div className="main_post" style={{ marginTop: "20px" }}>
-        <textarea id="postContent" placeholder="Write your post here..."></textarea>
-        <input type="file" id="uploadImage" multiple />
-    </div>
-    </div>
-    <div className="place_info">
-        {selectedPlace ? (
-            <div>
-                <h3>{selectedPlace.name}</h3>
-                {selectedPlace.photoUrl && (
-                    <img
-                        src={selectedPlace.photoUrl}
-                        alt={selectedPlace.name}
-                        style={{ width: "100%", height: "100px", objectFit: "cover" }}
-                    />
-                )}
-                <p>{selectedPlace.address}</p>
-                <p>Rating: {selectedPlace.rating || "N/A"}</p>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                    {Array.from({ length: 5 }, (_, index) => (
-                        <svg
-                            key={index}
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill={index < Math.round(selectedPlace.rating) ? "#FFD700" : "#E0E0E0"} // 칠해진 별은 금색, 나머지는 회색
-                            xmlns="http://www.w3.org/2000/svg"
+            <div className="google_map">
+                <LoadScript googleMapsApiKey="AIzaSyAWWAlxhWa2A20TsMzA7oivnox-QDjjwyQ" libraries={libraries}>
+                    <div style={{ marginBottom: "10px" }}>
+                        <button className="backBtn"
+                            onClick={undoLastPoint}
                         >
-                            <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 6.097 1.464 8.358L12 18.896l-7.4 4.865L6.064 15.4 0 9.303l8.332-1.151L12 .587z" />
-                        </svg>
-                    ))}
-                </div>
-                {/* 날짜별 집중률 데이터 표시 */}
-                {concentrationRates.length > 0 && (
-                    <div>
-                        <h4>날짜별 예상 집중률</h4>
-<div style={{
-    maxHeight: "150px", // 박스의 최대 높이 설정
-    overflowY: "auto",  // 세로 스크롤 활성화
-    border: "1px solid #ccc", // 박스 테두리 추가
-    borderRadius: "5px", // 모서리를 둥글게
-    padding: "10px", // 내부 여백
-    backgroundColor: "#f9f9f9" // 박스 배경색
-}}>
-    <ul style={{ margin: 0, padding: 0, listStyleType: "none" }}> {/* 리스트 스타일 제거 */}
-        {concentrationRates.map((rate, index) => (
-            <li key={index} style={{ marginBottom: "5px" }}> {/* 항목 간격 추가 */}
-                <strong>{rate.date}</strong>: {rate.rate}%
-            </li>
-        ))}
-    </ul>
-</div>
+                            되돌리기
+                        </button>
                     </div>
+                    <div className="input-container">
+                        {types.map((type) => (
+                            <label key={type} className="checkbox-label">
+                                <input
+                                    type="checkbox"
+                                    checked={selectedTypes.has(type)}
+                                    onChange={() => handleTypeChange(type)}
+                                />
+                                {type}
+                            </label>
+                        ))}
+                        <input className="textInputBtn"
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder="여행 제목을 입력하세요"
+                        />
+                        <button className="sendBtn"
+                            onClick={sendPathToServer}
+                        >
+                            서버로 전송
+                        </button>
+                        <div className="visibility-container">
+                            <label className="visibility-label">
+                                <input
+                                    type="radio"
+                                    value="public"
+                                    checked={visibility === "public"}
+                                    onChange={() => setVisibility("public")}
+                                />
+                                공개
+                            </label>
+                            <label className="visibility-label">
+                                <input
+                                    type="radio"
+                                    value="private"
+                                    checked={visibility === "private"}
+                                    onChange={() => setVisibility("private")}
+                                />
+                                비공개
+                            </label>
+                        </div>
+                    </div>
+
+                    <GoogleMap
+                        mapContainerClassName="map"
+                        mapContainerStyle={{ height: "100%", width: "100%" }}
+                        center={mapCenter}
+                        zoom={12}
+                        onClick={handleMapClick}
+                        onRightClick={handlePolylineDoubleClick}
+                        onZoomChanged={handleZoomChanged}
+                        onLoad={(map) => (mapRef.current = map)}
+                        onBoundsChanged={handleBoundsChanged}
+                    >
+                        {path.length > 1 && (
+                            <Polyline
+                                path={path}
+                                options={{
+                                    strokeColor: "#FF0000",
+                                    strokeOpacity: 1.0,
+                                    strokeWeight: 2,
+                                    draggable: true,
+                                    editable: true,
+                                }}
+                                onLoad={(polyline) => (polylineRef.current = polyline)}
+                                onMouseUp={handlePolylineEdit}
+                            />
+                        )}
+                        {markers.map((marker, index) => (
+                            <Marker
+                                key={index}
+                                position={marker.position}
+                                icon={{
+                                    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                                }}
+                                onClick={() => handleMarkerClick(index)}
+                                onRightClick={() => handleMarkerRightClick(index)}
+                            >
+                                {activeMarker === index && (
+                                    <InfoWindow
+                                        position={marker.position}
+                                        onCloseClick={() => setActiveMarker(null)} // InfoWindow 닫기
+                                    >
+                                        <div className="info-window-content">
+                                            <textarea
+                                                value={markerMemo}
+                                                onChange={handleMemoChange}
+                                                placeholder="메모를 입력하세요"
+                                            />
+                                            <button
+                                                onClick={handleMemoSave}
+                                            >
+                                                저장
+                                            </button>
+                                        </div>
+                                    </InfoWindow>
+                                )}
+                            </Marker>
+                        ))}
+                        {places.map((place) => (
+                            <Marker
+                                key={place.id}
+                                position={place.position}
+                                onClick={() => handlePlaceClick(place)} // 클릭 시 place 정보 업데이트
+                            />
+                        ))}
+                    </GoogleMap>
+                </LoadScript>
+                <div className="main_post">
+                    <textarea id="postContent" placeholder="Write your post here..."></textarea>
+                    <input type="file" id="uploadImage" multiple />
+                </div>
+            </div>
+            <div className="place_info">
+                {selectedPlace ? (
+                    <div>
+                        <h3>{selectedPlace.name}</h3>
+                        {selectedPlace.photoUrl && (
+                            <img
+                                src={selectedPlace.photoUrl}
+                                alt={selectedPlace.name}
+                            />
+                        )}
+                        <p>{selectedPlace.address}</p>
+                        <p>Rating: {selectedPlace.rating || "N/A"}</p>
+                        <div className="rating-stars">
+                            {Array.from({ length: 5 }, (_, index) => (
+                                <svg
+                                    key={index}
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill={index < Math.round(selectedPlace.rating) ? "#FFD700" : "#E0E0E0"}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 6.097 1.464 8.358L12 18.896l-7.4 4.865L6.064 15.4 0 9.303l8.332-1.151L12 .587z" />
+                                </svg>
+                            ))}
+                        </div>
+                        {concentrationRates.length > 0 && (
+                            <div>
+                                <h4>날짜별 예상 집중률</h4>
+                                <div className="concentration-rate-box">
+                                    <ul>
+                                        {concentrationRates.map((rate, index) => (
+                                            <li key={index}>
+                                                <strong>{rate.date}</strong>: {rate.rate}%
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <p>명소를 클릭하여 정보를 확인하세요.</p>
                 )}
             </div>
-        ) : (
-            <p>명소를 클릭하여 정보를 확인하세요.</p>
-        )}
-    </div>
-    
-</div>
-
-
+        </div>
     );
 }

@@ -1,8 +1,8 @@
 import axios from 'axios';
 //114.204.175.6
-//172.30.126.174
+//http://172.30.126.174:8080
 const instance = axios.create({
-    baseURL: 'http://172.30.126.174:8080',
+    baseURL: 'https://kumoh-trio-api.run.goorm.site',
     timeout: 1000
 });
 
@@ -11,11 +11,11 @@ export default {
 
     login(id, pw) {
         console.log("login api 실행됨")
-        return instance.post('/api/users/login', { userId: id, userPw: pw});
+        return instance.post('/api/users/login', { userId: id, userPw: pw });
     },
 
     register(id, pw) {
-        return instance.post('/api/users/register', { userId: id, userPw: pw});
+        return instance.post('/api/users/register', { userId: id, userPw: pw });
     },
 
     list() {
@@ -64,7 +64,7 @@ export default {
         return instance.put(`/community/${communityId}`, updatedData);
     },
 
-    outing(id, title, content, admin_id, member_count){
+    outing(id, title, content, admin_id, member_count) {
         console.log("outring함수실행")
         return instance.post('/community', {
             id: id,
@@ -75,7 +75,7 @@ export default {
         });
     },
 
-    newing(id, title, content, region){
+    newing(id, title, content, region) {
         return instance.post('/new', {
             region: region,
             title: title,
@@ -85,20 +85,20 @@ export default {
         });
     },
 
-    detail_show(id){
+    detail_show(id) {
         return instance.get(`/detail3/${id}`, {
             id: id
         });
     },
 
-    detail_show2(id, id2){
+    detail_show2(id, id2) {
         console.log("detail_show2실행")
         console.log("id:", id)
         return instance.get(`/detail4/${id}/${id2}`, {
         });
     },
 
-    detail_new(title, content, editor, communityid){
+    detail_new(title, content, editor, communityid) {
         return instance.post('/detail2', {
             title: title,
             content: content,
@@ -111,7 +111,7 @@ export default {
         return instance.delete(`/detail2/${id}/${detail_id}`); // URL에 detail_id를 포함시킴
     },
 
-    add_comment(id, communityId, nickname, newComment){
+    add_comment(id, communityId, nickname, newComment) {
         console.log("add_comment 실행!!")
         return instance.post(`/Comments/${id}/${communityId}`, {
             nickname: nickname,
@@ -119,27 +119,27 @@ export default {
         });
     },
     // '/client/:id'
-    get_approved_clients(id){
+    get_approved_clients(id) {
         return instance.get(`/client/${id}`, {
         });
     },
-    
-    get_pending_clients(id){
+
+    get_pending_clients(id) {
         return instance.get(`/client2/${id}`, {
         });
     },
 
-    reject_client(clientId){
+    reject_client(clientId) {
         return instance.delete(`/client2/${clientId}`, {
         });
     },
 
-    expel_client(clientId){
+    expel_client(clientId) {
         return instance.delete(`/client/${clientId}`, {
         });
     },
 
-    approve_client(clientId, nickname){
+    approve_client(clientId, nickname) {
         console.log("approve_client 발동")
         console.log("nickname2:", nickname)
         return instance.post(`/client/${clientId}`, {
@@ -147,59 +147,59 @@ export default {
         });
     },
 
-    request_join_community(nickname, communityId){
+    request_join_community(nickname, communityId) {
         return instance.post('/client2', {
             nickname: nickname
         });
     },
 
-    get_pending_clients2(user_id){
+    get_pending_clients2(user_id) {
         return instance.get(`/client3/${user_id}`, {
-            user_id : user_id
+            user_id: user_id
         });
     },
 
-    edit_info(userId){
+    edit_info(userId) {
         return instance.post('/edit', {
             userId: userId
         });
     },
 
-    fetch_token(response){
+    fetch_token(response) {
         console.log("1")
-        return instance.post('/login/success', {response: response});
+        return instance.post('/login/success', { response: response });
     },
 
     getpassword(userId) {
         console.log("Sending userId as query parameter. userId:", userId);
-    
+
         // userId가 객체일 경우 'id' 값을 추출, 그렇지 않으면 그대로 사용
         const extractedUserId = typeof userId === 'object' && userId.id ? userId.id : userId;
-    
+
         // 추출된 userId를 URL 인코딩
         const encodedUserId = encodeURIComponent(extractedUserId);
-    
+
         console.log("Encoded userId:", encodedUserId);
-    
+
         // 인코딩된 userId를 URL에 포함
         return instance.get(`/api/edit/EditInfo?userId=${encodedUserId}`);
     },
     updateUser(userId2, userPw) {
-        return instance.post('/api/edit/realedit', 
-        {
-            userId2: userId2,
-            userPw: userPw
-        });
+        return instance.post('/api/edit/realedit',
+            {
+                userId2: userId2,
+                userPw: userPw
+            });
     },
 
     deleteUser(user) {
-        return instance.post('/api/edit/delete', 
-        {
-            user: user
-        });
+        return instance.post('/api/edit/delete',
+            {
+                user: user
+            });
     },
     createTravelRecord(title, description) {
-        return instance.post('/api/travel-records', { title : title, description : description });
+        return instance.post('/api/travel-records', { title: title, description: description });
     },
     addComment(travelRecordId, content, commentId) {
         console.log("commentId!!!!!!!:", commentId)
@@ -218,15 +218,15 @@ export default {
         console.log("PostPolyLine!!!!!!", formData);
         return instance.post('/api/polyline', formData); // Content-Type을 명시적으로 설정하지 않음
     },
-    getMyTreavel(userId){
+    getMyTreavel(userId) {
         console.log("userId:", userId)
         return instance.get(`/api/travel/${userId}`);
     },
-    getMyTreavelMyPolylineId(polylineId){
+    getMyTreavelMyPolylineId(polylineId) {
         console.log("polylineId!!!!:", polylineId)
         return instance.get(`/api/travel/detail/${polylineId}`);
     },
-    getAllTreavel(){
+    getAllTreavel() {
         return instance.get('/api/travel/all');
     },
     // 여행 기록 삭제 API
@@ -237,19 +237,19 @@ export default {
         return instance.get(`/api/polyline/${polylineId}/markers`);
     }, // `/api/polyline/${polylineId}/comments`
     postcomment2(comment, author, polylineId) {
-        return instance.post(`/api/polyline/${polylineId}/comments`, { comment : comment, author : author });
+        return instance.post(`/api/polyline/${polylineId}/comments`, { comment: comment, author: author });
     },
     getcomment2(polylineId) {
         console.log("polylineId을 출력:", polylineId)
         return instance.get(`/api/polyline/${polylineId}/comments`);
     },
-    likeupdate(polylineId, likes){
-        return instance.post(`/api/like/${polylineId}`, {likes : likes});
+    likeupdate(polylineId, likes) {
+        return instance.post(`/api/like/${polylineId}`, { likes: likes });
     },
-    getlike(polylineId){
+    getlike(polylineId) {
         return instance.get(`/api/like/${polylineId}`);
     },
-    getAlllike(){
+    getAlllike() {
         console.log("getalllike 실행됨!")
         return instance.get(`/api/like/all`);
     },

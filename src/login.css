@@ -1,93 +1,124 @@
-/* Global styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f3f4f6;
-    margin: 0;
-    padding: 0;
+.unique-login-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
-
-h1 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 2rem;
-}
-
-/* Container styling */
-div {
-    max-width: 400px;
-    width: 90%;
-    margin: auto;
-    padding: 20px;
-    background-color: #ffffff;
+    width: 450px;
+    background: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: auto;
+    position: relative;
+    top: 120px;
+    left: 500px;
 }
 
-/* Input fields */
-input[type="text"], input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+/* 제목 */
+.unique-login-title {
+    color: black;
+    font-size: 2.5rem;
+    margin-bottom: 100px;
+}
+
+/* 입력 그룹 */
+.unique-login-input-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    /* 라벨과 입력 필드 세로 중앙 정렬 */
+}
+
+/* 라벨 */
+.unique-login-label {
+    color: black;
     font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease-in-out;
+    margin-right: 20px;
+    width: 80px;
+    /* 라벨과 입력 필드 사이 간격 */
 }
 
-input[type="text"]:focus, input[type="password"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* Buttons */
-button {
-    width: 100%;
+/* 입력 필드 */
+.unique-login-input {
+    width: 350px;
     padding: 10px;
-    margin: 10px 0;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.unique-login-input:focus {
+    border-color: #e69138;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* 버튼 스타일 */
+
+.btnContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.unique-login-button,
+.unique-register-button,
+.kakaoLoginBtn {
+    width: 80%;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: background 0.3s;
+    margin-top: 10px;
 }
 
-button:hover {
-    opacity: 0.9;
+/* 로그인 버튼 */
+.unique-login-button {
+    background: #555777;
+    color: #fff;
 }
 
-/* Primary button */
-button:first-of-type {
-    background-color: #007bff;
-    color: #ffffff;
+.unique-login-button:hover {
+    background: #e69138;
 }
 
-button:first-of-type:hover {
-    background-color: #0056b3;
+/* 회원가입 버튼 */
+.unique-register-button {
+    background: #555777;
+    color: #fff;
 }
 
-/* Secondary button */
-button:last-of-type {
-    background-color: #6c757d;
-    color: #ffffff;
+.unique-register-button:hover {
+    background: #e69138;
 }
 
-button:last-of-type:hover {
-    background-color: #565e64;
+.kakaoLoginBtn {
+    background: #f8e152;
+    color: black;
 }
 
-/* Kakao login button */
-.kakao-login-button {
-    background-color: #fee500;
-    color: #181600;
-    font-weight: bold;
+.kakaoLoginBtn:hover {
+    background: #e69138;
 }
 
-.kakao-login-button:hover {
-    background-color: #fddc00;
+.lottie-container {
+    position: absolute;
+    top: 30px;
+    right: 870px;
+    width: 600px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff7100;
+    height: 90px;
 }

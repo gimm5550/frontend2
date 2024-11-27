@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "^7.26.0",
+    "@lottiefiles/dotlottie-react": "^0.10.0",
+    "@lottiefiles/dotlottie-web": "^0.37.0",
     "@react-google-maps/api": "^2.20.3",
     "@react-native-async-storage/async-storage": "^2.0.0",
     "@react-native-seoul/kakao-login": "^5.4.1",
@@ -11,7 +14,9 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
+    "babel-runtime": "^6.26.0",
     "lodash": "^4.17.21",
+    "lottie-react": "^2.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-kakao-login": "^2.1.1",
@@ -43,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

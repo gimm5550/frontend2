@@ -1,0 +1,108 @@
+/* 전체 Flexbox 레이아웃 */
+.layout {
+  display: flex;
+  /* 메뉴바와 본문을 가로로 배치 */
+  height: 100vh;
+  /* 전체 화면 높이 */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* 스크롤바 숨김 */
+}
+
+/* 메뉴바 스타일 */
+.menu-bar {
+  flex-shrink: 0;
+  /* 고정된 크기 유지 */
+  width: 250px;
+  /* 메뉴바 너비 */
+  height: 100vh;
+  /* 메뉴바 높이를 화면 전체에 맞춤 */
+  background-color: #555777;
+  /* 메뉴바 배경색 */
+  overflow: hidden;
+  /* 스크롤바 완전히 제거 */
+  box-sizing: border-box;
+  /* 패딩 포함 크기 계산 */
+  position: relative;
+  /* Flexbox 레이아웃 안에서 위치 고정 */
+  /* 메뉴바 텍스트 색상 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  /* 내부 여백 */
+}
+
+/* 메뉴 제목 스타일 */
+.menu-bar h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  /* 제목 텍스트 색상 */
+  margin-bottom: 70px;
+  /* 아래 여백 추가 */
+}
+
+/* 메뉴 아이템 리스트 */
+.menu-bar ul {
+  list-style: none;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  /* 메뉴 리스트가 메뉴바의 전체 너비를 사용 */
+}
+
+/* 메뉴 아이템 스타일 */
+.menu-bar ul li {
+  margin-bottom: 15px;
+  /* 각 메뉴 항목 간격 */
+}
+
+.menu-bar ul li a {
+  text-decoration: none;
+  /* 링크 밑줄 제거 */
+  color: white;
+  /* 링크 텍스트 색상 */
+  font-size: 1.2rem;
+  padding: 10px 15px;
+  /* 링크 내부 여백 */
+  border-radius: 5px;
+  /* 링크 모서리를 둥글게 */
+  display: block;
+  /* 블록 요소로 설정 */
+  transition: background-color 0.3s ease;
+  /* 배경색 전환 효과 */
+}
+
+.menu-bar ul li a:hover {
+  color: #e69138;
+  /* 호버 시 텍스트 색상 유지 */
+}
+
+/* 메뉴바 버튼 스타일 */
+.menu-bar button {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #555777;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-bar button:hover {
+  color: #e69138;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 30px;
+}

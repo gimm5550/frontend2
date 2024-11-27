@@ -2,6 +2,7 @@ import React from 'react';
 import KakaoLogin from 'react-kakao-login';
 import { useNavigate } from 'react-router-dom'; // useNavigate를 import
 import api from '../../api';
+import '../../login.css';
 
 const KakaoLoginButton = () => {
   const navigate = useNavigate();
@@ -14,16 +15,16 @@ const KakaoLoginButton = () => {
         console.log("response2:", response);
         const { code, message, data } = response.data;
         if (code === 0) {
-            const userData = {
-              id: data // 사용자 ID를 response에서 가져옴
-            };
-            localStorage.setItem('user', JSON.stringify(userData));
-            console.log("data", data);
-            console.log("로그인 완료");
-            navigate('/mainlist');
+          const userData = {
+            id: data // 사용자 ID를 response에서 가져옴
+          };
+          localStorage.setItem('user', JSON.stringify(userData));
+          console.log("data", data);
+          console.log("로그인 완료");
+          navigate('/mainlist');
         } else {
-            console.log("code:", code);
-            console.log("오류:", message);
+          console.log("code:", code);
+          console.log("오류:", message);
         }
       })
       .catch(err => {
@@ -41,9 +42,7 @@ const KakaoLoginButton = () => {
       onSuccess={handleSuccess}
       onFail={handleFailure}
       render={(props) => (
-        <button onClick={props.onClick} style={{ padding: '10px 20px', backgroundColor: '#FEE500', border: 'none', borderRadius: '5px', color: '#3C1E1E', fontSize: '16px' }}>
-          카카오 로그인
-        </button>
+        <button className='kakaoLoginBtn' onClick={props.onClick}>카카오 로그인</button>
       )}
     />
   );
