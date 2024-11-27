@@ -18,13 +18,13 @@ export default function BypolylineId2({ polylineId }) {
         try {
             // 증가된 likes 계산
             const updatedLikes = likes + 1;
-    
+
             // 상태 업데이트
             setLikes(updatedLikes);
-    
+
             // 서버에 증가된 likes 전송
             await api.likeupdate(polylineId, updatedLikes);
-    
+
             // 서버에서 최신 likes 값 확인 (필요한 경우)
             const response = await api.getlike(polylineId);
             console.log("like response (after update):", response.data);
@@ -41,7 +41,7 @@ export default function BypolylineId2({ polylineId }) {
                 console.error("Failed to fetch likes:", error);
             }
         };
-    
+
         if (polylineId) {
             fetchLikes();
         }
@@ -178,7 +178,7 @@ export default function BypolylineId2({ polylineId }) {
                 )}
 
                 {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-                
+
                 <div style={{ textAlign: "center", margin: "20px 0" }}>
                     <button
                         onClick={handleLike}
@@ -197,35 +197,35 @@ export default function BypolylineId2({ polylineId }) {
                     </span>
                 </div>
                 {/* 댓글 섹션 */}
-<div className="custom-comments-section">
-    <h3 className="custom-comments-title">댓글</h3>
-    <ul className="custom-comments-list">
-        {comments.map((comment, index) => (
-            <li key={index} className="custom-comment-item">
-                <strong className="custom-comment-author">{comment.author}:</strong> {comment.content}
-                <span className="custom-comment-timestamp"> ({comment.timestamp})</span>
-            </li>
-        ))}
-    </ul>
-    <div className="custom-comment-input-container">
-        <input
-            type="text"
-            className="custom-comment-author-input"
-            placeholder="작성자"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-        />
-        <textarea
-            className="custom-comment-content-input"
-            placeholder="댓글을 입력하세요"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-        />
-        <button className="custom-add-comment-button" onClick={handleAddComment}>
-            댓글 추가
-        </button>
-    </div>
-</div>
+                <div className="custom-comments-section">
+                    <h3 className="custom-comments-title">댓글</h3>
+                    <ul className="custom-comments-list">
+                        {comments.map((comment, index) => (
+                            <li key={index} className="custom-comment-item">
+                                <strong className="custom-comment-author">{comment.author}:</strong> {comment.content}
+                                <span className="custom-comment-timestamp"> ({comment.timestamp})</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="custom-comment-input-container">
+                        <input
+                            type="text"
+                            className="custom-comment-author-input"
+                            placeholder="작성자"
+                            value={author}
+                            onChange={(e) => setAuthor(e.target.value)}
+                        />
+                        <textarea
+                            className="custom-comment-content-input"
+                            placeholder="댓글을 입력하세요"
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                        />
+                        <button className="custom-add-comment-button" onClick={handleAddComment}>
+                            댓글 추가
+                        </button>
+                    </div>
+                </div>
 
 
                 {/* 상세 페이지 이동 버튼 */}

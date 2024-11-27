@@ -89,7 +89,7 @@ export default function MyTravel() {
                             <button
                                 style={{
                                     padding: "8px 16px",
-                                    backgroundColor: "#007bff",
+                                    backgroundColor: "#555777",
                                     color: "#fff",
                                     border: "none",
                                     borderRadius: "4px",

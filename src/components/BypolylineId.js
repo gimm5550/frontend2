@@ -73,13 +73,13 @@ export default function BypolylineId() {
         try {
             // 증가된 likes 계산
             const updatedLikes = likes + 1;
-    
+
             // 상태 업데이트
             setLikes(updatedLikes);
-    
+
             // 서버에 증가된 likes 전송
             await api.likeupdate(polylineId, updatedLikes);
-    
+
             // 서버에서 최신 likes 값 확인 (필요한 경우)
             const response = await api.getlike(polylineId);
             console.log("like response (after update):", response.data);
@@ -87,7 +87,7 @@ export default function BypolylineId() {
             console.error("Failed to handle like:", error);
         }
     };
-    
+
     useEffect(() => {
         const fetchLikes = async () => {
             try {
@@ -97,7 +97,7 @@ export default function BypolylineId() {
                 console.error("Failed to fetch likes:", error);
             }
         };
-    
+
         if (polylineId) {
             fetchLikes();
         }
@@ -140,7 +140,7 @@ export default function BypolylineId() {
             mapInstance.fitBounds(bounds);
         }
     };
-    
+
     useEffect(() => {
         if (coordinates.length > 0) {
             const timer = setTimeout(() => {
@@ -154,7 +154,7 @@ export default function BypolylineId() {
             {/* 본문 영역 */}
             <div style={{ flex: "1", padding: "10px", overflow: "auto" }}>
                 <h2 style={{ textAlign: "center", fontSize: "16px", marginBottom: "5px" }}>{title}</h2>
-    
+
                 <div style={{ margin: "10px 0" }}>
                     <p style={{ fontSize: "12px", lineHeight: "1.4" }}>{postContent}</p>
                 </div>
@@ -213,7 +213,7 @@ export default function BypolylineId() {
                     </div>
                 )}
 
-                
+
                 {/* 구글 맵으로 채운 영역 */}
                 {error ? (
                     <p style={{ color: "red", textAlign: "center", fontSize: "12px" }}>{error}</p>
@@ -265,98 +265,102 @@ export default function BypolylineId() {
                         {likes}
                     </span>
                     {!showPhotos && (
-                    <div style={{ textAlign: "center", margin: "10px 0" }}>
-                        <button
-                            onClick={togglePhotos}
-                            style={{
-                                backgroundColor: "#4CAF50",
-                                color: "white",
-                                padding: "10px 20px",
-                                fontSize: "14px",
-                                border: "none",
-                                borderRadius: "5px",
-                                cursor: "pointer",
-                            }}
-                        >
-                            사진 펼치기
-                        </button>
-                    </div>
-                )}
+                        <div style={{ textAlign: "center", margin: "10px 0" }}>
+                            <button
+                                onClick={togglePhotos}
+                                style={{
+                                    backgroundColor: "#555777",
+                                    color: "white",
+                                    padding: "10px 20px",
+                                    fontSize: "14px",
+                                    border: "none",
+                                    borderRadius: "5px",
+                                    cursor: "pointer"
+                                }}
+                            >
+                                사진 펼치기
+                            </button>
+                        </div>
+                    )}
                 </div>
-    
+
                 <div>
-    <h3 style={{ fontSize: "14px", marginBottom: "5px", textAlign: "center", color: "#333", fontWeight: "bold" }}>댓글</h3>
-    <ul style={{ padding: "0", margin: "0", listStyle: "none", borderTop: "1px solid #ddd", borderBottom: "1px solid #ddd", padding: "10px" }}>
-        {comments.map((comment, index) => (
-            <li 
-                key={index} 
-                style={{ 
-                    fontSize: "12px", 
-                    marginBottom: "10px", 
-                    padding: "10px", 
-                    borderRadius: "5px", 
-                    backgroundColor: "#f7f7f7", 
-                    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)" 
-                }}
-            >
-                <strong style={{ color: "#007bff" }}>{comment.author}:</strong> {comment.content}
-                <span style={{ fontSize: "10px", color: "gray", marginLeft: "5px" }}> ({comment.timestamp})</span>
-            </li>
-        ))}
-    </ul>
-    <div style={{ marginTop: "10px", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <input
-            type="text"
-            placeholder="작성자"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            style={{
-                fontSize: "12px",
-                padding: "8px",
-                width: "80%",
-                marginBottom: "10px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.1)"
-            }}
-        />
-        <div style={{ display: "flex", width: "80%" }}>
-            <textarea
-                placeholder="댓글을 입력하세요"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                style={{
-                    fontSize: "12px",
-                    padding: "8px",
-                    width: "75%",
-                    height: "50px",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.1)"
-                }}
-            />
-            <button
-                onClick={handleAddComment}
-                style={{
-                    fontSize: "12px",
-                    padding: "8px 15px",
-                    marginLeft: "10px",
-                    border: "none",
-                    backgroundColor: "#007bff",
-                    color: "white",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
-                }}
-            >
-                댓글 추가
-            </button>
-        </div>
-    </div>
-</div>
+                    <h3 style={{ fontSize: "14px", marginBottom: "5px", textAlign: "center", color: "#333", fontWeight: "bold" }}>댓글</h3>
+                    <ul style={{ padding: "0", margin: "0", listStyle: "none", borderTop: "1px solid #ddd", borderBottom: "1px solid #ddd", padding: "10px" }}>
+                        {comments.map((comment, index) => (
+                            <li
+                                key={index}
+                                style={{
+                                    fontSize: "12px",
+                                    marginBottom: "10px",
+                                    padding: "10px",
+                                    borderRadius: "5px",
+                                    backgroundColor: "#f7f7f7",
+                                    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)"
+                                }}
+                            >
+                                <strong style={{ color: "#007bff" }}>{comment.author}:</strong> {comment.content}
+                                <span style={{ fontSize: "10px", color: "gray", marginLeft: "5px" }}> ({comment.timestamp})</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <div style={{
+                        marginTop: "10px", display: "flex", flexDirection: "column", alignItems: "flex-start",
+                        width: "100%", marginLeft: "15%"
+                    }}>
+                        <input
+                            type="text"
+                            placeholder="작성자"
+                            value={author}
+                            onChange={(e) => setAuthor(e.target.value)}
+                            style={{
+                                fontSize: "12px",
+                                padding: "8px",
+                                width: "30%",
+                                marginBottom: "12px",
+                                maxWidth: "400px",
+                                border: "1px solid #ccc",
+                                borderRadius: "4px",
+                                boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.1)"
+                            }}
+                        />
+                        <div style={{ display: "flex", width: "80%" }}>
+                            <textarea
+                                placeholder="댓글을 입력하세요"
+                                value={newComment}
+                                onChange={(e) => setNewComment(e.target.value)}
+                                style={{
+                                    fontSize: "12px",
+                                    padding: "8px",
+                                    width: "75%",
+                                    height: "50px",
+                                    border: "1px solid #ccc",
+                                    borderRadius: "4px",
+                                    boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.1)"
+                                }}
+                            />
+                            <button
+                                onClick={handleAddComment}
+                                style={{
+                                    fontSize: "12px",
+                                    padding: "8px 15px",
+                                    marginLeft: "10px",
+                                    border: "none",
+                                    backgroundColor: "#555777",
+                                    color: "white",
+                                    borderRadius: "4px",
+                                    cursor: "pointer",
+                                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
+                                }}
+                            >
+                                댓글 추가
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-    
+
             {/* 오른쪽 정보 영역 */}
             <div
                 style={{
@@ -372,5 +376,5 @@ export default function BypolylineId() {
             </div>
         </div>
     );
-    
+
 }
