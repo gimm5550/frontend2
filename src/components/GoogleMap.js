@@ -676,10 +676,9 @@ export default function GoogleMapPage() {
                             </label>
                         </div>
                     </div>
-
                     <GoogleMap
                         mapContainerClassName="map"
-                        mapContainerStyle={{ height: "100%", width: "100%" }}
+                        mapContainerStyle={{ height: "70%", width: "100%" }}
                         center={mapCenter}
                         zoom={12}
                         onClick={handleMapClick}
