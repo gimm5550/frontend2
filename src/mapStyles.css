@@ -30,6 +30,7 @@
 }
 
 .sendBtn {
+  margin-bottom: 5px;
   padding: 10px;
   width: 130px;
   height: 40px;
@@ -58,22 +59,22 @@ button:hover {
 
 .visibility-container {
   display: flex;
-  justify-items: center;
+  flex-direction: row;
   align-items: center;
-  min-width: none;
+  gap: 20px;
+  margin-left: 150px;
 }
 
 .visibility-label {
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
   align-items: center;
-  writing-mode: horizontal-tb;
-  margin-right: 10px;
-  margin: auto;
+  gap: 5px;
+  white-space: nowrap;
 }
 
 .textInputBtn {
   margin-left: 30px;
+  margin-bottom: 10px;
   width: 350px;
   height: 40px;
   padding: 10px;

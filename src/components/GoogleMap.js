@@ -652,23 +652,27 @@ export default function GoogleMapPage() {
                             서버로 전송
                         </button>
                         <div className="visibility-container">
-                            <label className="visibility-label">
-                                <input
-                                    type="radio"
-                                    value="public"
-                                    checked={visibility === "public"}
-                                    onChange={() => setVisibility("public")}
-                                />
-                                공개
+                            <label>
+                                <div className="visibility-label">
+                                    <input
+                                        type="radio"
+                                        value="public"
+                                        checked={visibility === "public"}
+                                        onChange={() => setVisibility("public")}
+                                    />
+                                    공개
+                                </div>
                             </label>
-                            <label className="visibility-label">
-                                <input
-                                    type="radio"
-                                    value="private"
-                                    checked={visibility === "private"}
-                                    onChange={() => setVisibility("private")}
-                                />
-                                비공개
+                            <label>
+                                <div className="visibility-label">
+                                    <input
+                                        type="radio"
+                                        value="private"
+                                        checked={visibility === "private"}
+                                        onChange={() => setVisibility("private")}
+                                    />
+                                    비공개
+                                </div>
                             </label>
                         </div>
                     </div>
