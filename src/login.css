@@ -109,9 +109,12 @@
 
 .lottie-container {
     position: absolute;
-    top: 30px;
-    right: 870px;
-    width: 600px;
+    top: 7%;
+    right: 190%;
+    width: 200%;
+    max-width: 600px;
+    margin: auto;
+
 }
 
 .footer {
