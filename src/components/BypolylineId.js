@@ -304,25 +304,12 @@ export default function BypolylineId() {
                             </li>
                         ))}
                     </ul>
-                    <div style={{
-                        marginTop: "10px", display: "flex", flexDirection: "column", alignItems: "flex-start",
-                        width: "100%", marginLeft: "15%"
-                    }}>
-                        <input
+                    <div className="inputContainerr">
+                        <input className="name"
                             type="text"
                             placeholder="작성자"
                             value={author}
                             onChange={(e) => setAuthor(e.target.value)}
-                            style={{
-                                fontSize: "12px",
-                                padding: "8px",
-                                width: "30%",
-                                marginBottom: "12px",
-                                maxWidth: "400px",
-                                border: "1px solid #ccc",
-                                borderRadius: "4px",
-                                boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.1)"
-                            }}
                         />
                         <div style={{ display: "flex", width: "80%" }}>
                             <textarea
@@ -332,27 +319,15 @@ export default function BypolylineId() {
                                 style={{
                                     fontSize: "12px",
                                     padding: "8px",
-                                    width: "75%",
+                                    width: "85%",
                                     height: "50px",
                                     border: "1px solid #ccc",
                                     borderRadius: "4px",
                                     boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.1)"
                                 }}
                             />
-                            <button
-                                onClick={handleAddComment}
-                                style={{
-                                    fontSize: "12px",
-                                    padding: "8px 15px",
-                                    marginLeft: "10px",
-                                    border: "none",
-                                    backgroundColor: "#555777",
-                                    color: "white",
-                                    borderRadius: "4px",
-                                    cursor: "pointer",
-                                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
-                                }}
-                            >
+                            <button className="addCommenBtn"
+                                onClick={handleAddComment}                            >
                                 댓글 추가
                             </button>
                         </div>
