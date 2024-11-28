@@ -51,17 +51,11 @@ export default function MyTravel() {
         <div>
             <h1 style={{ textAlign: "center", marginBottom: "20px" }}>전체 여행 기록</h1>
             <div style={{ textAlign: "center", marginBottom: "20px" }}>
-                <input
+                <input className="search-title"
                     type="text"
                     placeholder="여행 제목으로 검색"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{
-                        padding: "10px",
-                        width: "300px",
-                        borderRadius: "4px",
-                        border: "1px solid #ccc",
-                    }}
                 />
             </div>
             {error ? (
@@ -86,18 +80,8 @@ export default function MyTravel() {
                             <div>
                                 <h2 style={{ margin: 0 }}>제목: {polyline.title}</h2>
                             </div>
-                            <button
-                                style={{
-                                    padding: "8px 16px",
-                                    backgroundColor: "#555777",
-                                    color: "#fff",
-                                    border: "none",
-                                    borderRadius: "4px",
-                                    cursor: "pointer",
-                                    fontWeight: "bold",
-                                }}
-                                onClick={() => handleEnterMyTravel(polyline.polylineId)}
-                            >
+                            <button className="enterBtn"
+                                onClick={() => handleEnterMyTravel(polyline.polylineId)}>
                                 입장
                             </button>
                         </div>

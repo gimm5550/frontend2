@@ -266,17 +266,8 @@ export default function BypolylineId() {
                     </span>
                     {!showPhotos && (
                         <div style={{ textAlign: "center", margin: "10px 0" }}>
-                            <button
+                            <button className="spreadPic"
                                 onClick={togglePhotos}
-                                style={{
-                                    backgroundColor: "#555777",
-                                    color: "white",
-                                    padding: "10px 20px",
-                                    fontSize: "14px",
-                                    border: "none",
-                                    borderRadius: "5px",
-                                    cursor: "pointer"
-                                }}
                             >
                                 사진 펼치기
                             </button>
@@ -312,19 +303,10 @@ export default function BypolylineId() {
                             onChange={(e) => setAuthor(e.target.value)}
                         />
                         <div style={{ display: "flex", width: "80%" }}>
-                            <textarea
+                            <textarea className="inputBox"
                                 placeholder="댓글을 입력하세요"
                                 value={newComment}
                                 onChange={(e) => setNewComment(e.target.value)}
-                                style={{
-                                    fontSize: "12px",
-                                    padding: "8px",
-                                    width: "85%",
-                                    height: "50px",
-                                    border: "1px solid #ccc",
-                                    borderRadius: "4px",
-                                    boxShadow: "inset 0 1px 3px rgba(0, 0, 0, 0.1)"
-                                }}
                             />
                             <button className="addCommenBtn"
                                 onClick={handleAddComment}                            >

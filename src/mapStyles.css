@@ -29,6 +29,11 @@
   cursor: pointer;
 }
 
+.backBtn:hover,
+.sendBtn:hover {
+  background-color: #e69138;
+}
+
 .sendBtn {
   margin-bottom: 5px;
   padding: 10px;
@@ -106,6 +111,13 @@ input[type="radio"] {
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.main_post:focus,
+#postContent:focus {
+  border-color: #e69138;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 #postContent {
