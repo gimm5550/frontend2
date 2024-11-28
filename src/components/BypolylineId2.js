@@ -221,7 +221,8 @@ export default function BypolylineId2({ polylineId }) {
                             value={newComment}
                             onChange={(e) => setNewComment(e.target.value)}
                         />
-                        <button className="custom-add-comment-button" onClick={handleAddComment}>
+                        <button className="custom-add-comment-button" onClick={handleAddComment}
+                            style={{ backgroundColor: "#555777" }}>
                             댓글 추가
                         </button>
                     </div>
@@ -233,7 +234,7 @@ export default function BypolylineId2({ polylineId }) {
                     <button
                         onClick={handleNavigate}
                         style={{
-                            backgroundColor: "#4CAF50",
+                            backgroundColor: "#555777",
                             color: "white",
                             padding: "10px 20px",
                             fontSize: "16px",
