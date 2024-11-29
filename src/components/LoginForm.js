@@ -80,31 +80,34 @@ export default function FromServer() {
             <div className="lottie-container">
                 <Lottie animationData={animation} loop={true} autoplay={true} />
             </div>
-            <div className="footer"></div>
-            <h1 className="unique-login-title">로그인하세요.</h1>
-            <div className="unique-login-input-group">
-                <label htmlFor="username" className="unique-login-label">아이디:</label>
-                <input
-                    type="text"
-                    id="username"
-                    className="unique-login-input"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
+            <div className="unique-login">
+                <h1 className="unique-login-title">로그인하세요.</h1>
+                <div className="unique-login-input-group">
+                    <label htmlFor="username" className="unique-login-label">아이디:</label>
+                    <input
+                        type="text"
+                        id="username"
+                        className="unique-login-input"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </div>
+                <div className="unique-login-input-group">
+                    <label htmlFor="password" className="unique-login-label">비밀번호:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        className="unique-login-input"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <div className="btnContainer">
+                    <button className="unique-login-button" onClick={handleLogin}>로그인</button>
+                    <button className="unique-register-button" onClick={register}>회원가입</button>
+                    <KakaoLoginButton />
+                </div>
             </div>
-            <div className="unique-login-input-group">
-                <label htmlFor="password" className="unique-login-label">비밀번호:</label>
-                <input
-                    type="password"
-                    id="password"
-                    className="unique-login-input"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            <button className="unique-login-button" onClick={handleLogin}>로그인</button>
-            <button className="unique-register-button" onClick={register}>회원가입</button>
-            <KakaoLoginButton />
         </div>
     );
 }
